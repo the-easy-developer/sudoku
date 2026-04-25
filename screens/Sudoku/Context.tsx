@@ -3,6 +3,7 @@ import {
   createContext,
   ReactNode,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -13,6 +14,7 @@ type SudokuContextType = {
   handleErase: (currentCell: number) => void;
   setCurrentCell: (currentCell: number) => void;
   setPencilMode: (pencilMode: boolean) => void;
+  sudokuBoard: (number | undefined)[];
 };
 
 const initialContext: SudokuContextType = {
@@ -21,17 +23,21 @@ const initialContext: SudokuContextType = {
   handleErase: () => undefined,
   setCurrentCell: () => undefined,
   setPencilMode: () => undefined,
+  sudokuBoard: [],
 };
 
 const SudokuContext = createContext<SudokuContextType>(initialContext);
 
 export const SudokuContextProvider = ({
   children,
+  sudoku,
 }: {
   children: ReactNode;
+  sudoku: number[];
 }) => {
   const [currentCell, setCurrentCell] = useState(-1);
   const [pencilMode, setPencilMode] = useState(false);
+  const [sudokuBoard, setSudokuBoard] = useState<(number | undefined)[]>([]);
 
   const contextValue: SudokuContextType = useMemo(() => {
     return {
@@ -40,8 +46,13 @@ export const SudokuContextProvider = ({
       handleErase: (cellNumber: number) => undefined,
       setCurrentCell,
       setPencilMode,
+      sudokuBoard,
     };
-  }, [currentCell, pencilMode]);
+  }, [currentCell, pencilMode, sudokuBoard]);
+
+  useEffect(() => {
+    setSudokuBoard(sudoku);
+  }, [sudoku]);
 
   return (
     <SudokuContext.Provider value={contextValue}>

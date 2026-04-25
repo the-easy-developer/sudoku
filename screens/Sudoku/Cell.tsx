@@ -16,11 +16,13 @@ export const Cell = ({
 }) => {
   const { width } = useWindowDimensions();
 
-  const { currentCell, setCurrentCell } = useSudokuContext();
+  const { currentCell, setCurrentCell, sudokuBoard } = useSudokuContext();
 
   const cellSize = (width - 11) / 9;
 
   const isActive = currentCell === index;
+
+  const value = sudokuBoard[index - 1] ?? '';
 
   return (
     <Pressable onPress={() => setCurrentCell(index)}>
@@ -37,7 +39,7 @@ export const Cell = ({
           isActive && cellStyleSheet.active,
         ]}
       >
-        {index}
+        {sudokuBoard[index - 1] ?? ''}
       </Text>
     </Pressable>
   );

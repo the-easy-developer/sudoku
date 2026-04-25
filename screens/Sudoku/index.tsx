@@ -1,3 +1,4 @@
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -20,10 +21,12 @@ const cellsThickTopBorder = Array.from({ length: 9 }).map((_, i) => i + 1);
 
 const cellsThickLeftBorder = Array.from({ length: 9 }).map((_, i) => i * 9 + 1);
 
-export const Sudoku = () => {
+// TODO: remove any
+export const Sudoku = ({ route }: { route: RouteProp<any> }) => {
   return (
     <SafeAreaView style={{ marginLeft: 3, marginRight: 3 }}>
-      <SudokuContextProvider>
+      {/* TODO: remove any */}
+      <SudokuContextProvider sudoku={(route.params?.sudoku ?? []) as any[]}>
         <Timer />
         <View style={SudokuStyleSheet.sudoku}>
           {loop.map(k => {

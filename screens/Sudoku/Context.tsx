@@ -1,20 +1,33 @@
 import {
-  Context,
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react';
 
+type SudokuCell = {
+  value: number | undefined | number[];
+  isEditable: boolean;
+};
+
 type SudokuContextType = {
   currentCell: number;
   pencilMode: boolean;
-  handleErase: (currentCell: number) => void;
+  handleErase: () => void;
   setCurrentCell: (currentCell: number) => void;
   setPencilMode: (pencilMode: boolean) => void;
-  sudokuBoard: (number | undefined)[];
+  sudokuBoard: SudokuCell[];
+  enterValue: (n: number) => void;
+};
+
+const addOnceInArray = (arr: number[], digit: number) => {
+  if (arr.includes(digit)) {
+    return arr.filter(a => a !== digit);
+  }
+  return arr.concat(digit).sort((a, b) => a - b);
 };
 
 const initialContext: SudokuContextType = {
@@ -24,6 +37,7 @@ const initialContext: SudokuContextType = {
   setCurrentCell: () => undefined,
   setPencilMode: () => undefined,
   sudokuBoard: [],
+  enterValue: () => undefined,
 };
 
 const SudokuContext = createContext<SudokuContextType>(initialContext);
@@ -37,21 +51,59 @@ export const SudokuContextProvider = ({
 }) => {
   const [currentCell, setCurrentCell] = useState(-1);
   const [pencilMode, setPencilMode] = useState(false);
-  const [sudokuBoard, setSudokuBoard] = useState<(number | undefined)[]>([]);
+  const [sudokuBoard, setSudokuBoard] = useState<SudokuCell[]>([]);
 
   const contextValue: SudokuContextType = useMemo(() => {
     return {
       currentCell,
       pencilMode,
-      handleErase: (cellNumber: number) => undefined,
+      handleErase: () => {
+        const index = currentCell - 1;
+        const cell = sudokuBoard[index];
+        if (!cell || !cell.isEditable) {
+          return;
+        }
+        cell.value = undefined;
+        setSudokuBoard([
+          ...sudokuBoard.slice(0, index),
+          cell,
+          ...sudokuBoard.slice(index + 1),
+        ]);
+      },
       setCurrentCell,
       setPencilMode,
       sudokuBoard,
+      enterValue: (digit: number) => {
+        const index = currentCell - 1;
+        const cell = sudokuBoard[index];
+        if (!cell || !cell.isEditable) {
+          return;
+        }
+
+        if (pencilMode) {
+          cell.value = Array.isArray(cell.value)
+            ? addOnceInArray(cell.value, digit)
+            : [digit];
+        } else {
+          cell.value = digit;
+        }
+
+        setSudokuBoard([
+          ...sudokuBoard.slice(0, index),
+          cell,
+          ...sudokuBoard.slice(index + 1),
+        ]);
+      },
     };
   }, [currentCell, pencilMode, sudokuBoard]);
 
   useEffect(() => {
-    setSudokuBoard(sudoku);
+    setSudokuBoard(
+      sudoku.map(v => ({
+        isEditable: v === undefined,
+        value: v,
+      })),
+    );
   }, [sudoku]);
 
   return (

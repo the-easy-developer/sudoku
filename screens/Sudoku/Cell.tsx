@@ -10,6 +10,9 @@ import { useSudokuContext } from './Context';
 
 const digitsArr = Array.from({ length: 9 }).map((_, i) => i + 1);
 
+export const dontDisplayEmpty = (value: number) =>
+  value === -1 ? undefined : value;
+
 export const Cell = ({
   cellStyle,
   index,
@@ -75,7 +78,7 @@ export const Cell = ({
             isActive && cellStyleSheet.active,
           ]}
         >
-          {value}
+          {dontDisplayEmpty(value)}
         </Text>
       )}
     </Pressable>

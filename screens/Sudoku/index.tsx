@@ -12,7 +12,7 @@ import { Board } from './Board';
 export const Sudoku = ({ route }: { route: RouteProp<any> }) => {
   return (
     <SafeAreaView style={{ flex: 1, gap: 10, margin: 5 }}>
-      <SudokuContextProvider sudoku={(route.params?.sudoku ?? [])}>
+      <SudokuContextProvider sudoku={(route.params?.board ?? {})}>
         <Timer />
         <Board />
         <Operations />

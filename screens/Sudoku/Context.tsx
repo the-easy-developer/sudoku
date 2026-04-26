@@ -7,13 +7,15 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { BoardType } from '../../db/queries';
 
 type SudokuCell = {
-  value: number | undefined | number[];
+  value: number | number[];
   isEditable: boolean;
 };
 
 type SudokuContextType = {
+  boardDbId: number;
   currentCell: number;
   pencilMode: boolean;
   handleErase: () => void;
@@ -31,6 +33,7 @@ const addOnceInArray = (arr: number[], digit: number) => {
 };
 
 const initialContext: SudokuContextType = {
+  boardDbId: -1,
   currentCell: -1,
   pencilMode: false,
   handleErase: () => undefined,
@@ -47,14 +50,16 @@ export const SudokuContextProvider = ({
   sudoku,
 }: {
   children: ReactNode;
-  sudoku: number[];
+  sudoku: BoardType;
 }) => {
   const [currentCell, setCurrentCell] = useState(-1);
   const [pencilMode, setPencilMode] = useState(false);
   const [sudokuBoard, setSudokuBoard] = useState<SudokuCell[]>([]);
+  const [boardDbId, setBoardDbId] = useState(-1);
 
   const contextValue: SudokuContextType = useMemo(() => {
     return {
+      boardDbId,
       currentCell,
       pencilMode,
       handleErase: () => {
@@ -63,7 +68,7 @@ export const SudokuContextProvider = ({
         if (!cell || !cell.isEditable) {
           return;
         }
-        cell.value = undefined;
+        cell.value = -1;
         setSudokuBoard([
           ...sudokuBoard.slice(0, index),
           cell,
@@ -98,8 +103,9 @@ export const SudokuContextProvider = ({
   }, [currentCell, pencilMode, sudokuBoard]);
 
   useEffect(() => {
+    setBoardDbId(sudoku.id);
     setSudokuBoard(
-      sudoku.map(v => ({
+      sudoku.board.map(v => ({
         isEditable: v === undefined,
         value: v,
       })),

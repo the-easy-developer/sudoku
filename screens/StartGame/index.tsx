@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, StyleSheet, Pressable, Text, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Pressable, Text } from 'react-native';
 
 import { openDB } from '../../db';
 import { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ export const StartGame = () => {
   const [boards, setBoards] = useState<BoardType[]>([]);
 
   useEffect(() => {
+    // TODO: add loading state, handle catch scenario
     openDB().then(() => {
       queryBoards().then(boards => {
         setBoards(boards);
@@ -22,20 +23,22 @@ export const StartGame = () => {
 
   return (
     <View style={styles.screen}>
-      {boards.map(b => {
+      {boards.map(board => {
         return (
           <Pressable
-            key={b.id}
+            key={board.id}
             onPress={() => {
-              console.log(b);
+              navigation.navigate('Sudoku', {
+                board,
+              });
             }}
             style={styles.button}
           >
             <Text style={{ textAlign: 'center', color: '#fff', fontSize: 25 }}>
-              {b.level}
+              {board.level}
             </Text>
             <Text style={{ textAlign: 'center', color: '#fff' }}>
-              {formatTime(b.time)}
+              {formatTime(board.time)}
             </Text>
           </Pressable>
         );
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 10,
     justifyContent: 'center',
+    // TODO: handle color in a better manner
     backgroundColor: '#0398fc',
     gap: 7,
   },

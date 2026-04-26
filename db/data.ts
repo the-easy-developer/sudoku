@@ -1,34 +1,997 @@
 export type DataBoardType = {
   type: string;
-  board: (number | number[])[];
+  board: {
+    value: number | number[];
+    isEditable: number; // 1 | 0
+  }[];
 };
 
 export const boards = [
   {
     type: 'Easy',
     board: [
-      9, -1, -1, 5, -1, 8, -1, -1, 7, -1, 8, -1, 3, -1, 2, 9, -1, 5, -1, 5, 4,
-      -1, -1, -1, -1, 8, -1, -1, 7, -1, 6, 8, -1, -1, 3, 2, 1, -1, -1, -1, -1,
-      4, -1, -1, 8, 5, -1, -1, 2, 1, 9, -1, 6, -1, -1, -1, -1, 9, -1, 6, -1, -1,
-      1, 7, 2, 6, -1, -1, 1, -1, 4, -1, -1, -1, 1, 4, 7, -1, -1, 5, 6,
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
     ],
   },
   {
     type: 'Medium',
     board: [
-      -1, 9, 4, -1, -1, -1, 6, -1, -1, -1, 5, 3, 9, 8, 6, -1, 4, 1, -1, 8, 2,
-      -1, 1, 3, 9, 7, 5, -1, -1, -1, 1, 6, -1, 3, -1, 7, 9, -1, -1, -1, -1, 2,
-      -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 1, 2, 5, 6, -1, -1, 4, 1, -1, -1,
-      -1, -1, 1, -1, -1, -1, -1, 7, -1, -1, 3, -1, -1, 2, 9, -1, -1, 5, -1,
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
     ],
   },
   {
     type: 'Hard',
     board: [
-      5, -1, -1, -1, 7, -1, -1, -1, -1, -1, 3, -1, -1, -1, 9, -1, 2, 8, -1, -1,
-      -1, -1, 6, 3, 7, -1, 1, -1, -1, -1, -1, -1, 8, 2, -1, -1, -1, 7, 2, -1, 9,
-      -1, -1, -1, -1, 9, -1, 5, -1, -1, -1, -1, 7, 6, 6, -1, -1, 1, 8, -1, -1,
-      -1, -1, -1, 1, 7, 9, 3, -1, 6, 8, 4, 8, 5, 3, 2, 4, -1, 9, -1, 7,
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 1,
+        isEditable: 0,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 6,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: 8,
+        isEditable: 0,
+      },
+      {
+        value: 5,
+        isEditable: 0,
+      },
+      {
+        value: 3,
+        isEditable: 0,
+      },
+      {
+        value: 2,
+        isEditable: 0,
+      },
+      {
+        value: 4,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 9,
+        isEditable: 0,
+      },
+      {
+        value: -1,
+        isEditable: 1,
+      },
+      {
+        value: 7,
+        isEditable: 0,
+      },
     ],
   },
 ];

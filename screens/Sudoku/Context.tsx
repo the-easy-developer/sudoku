@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { BoardType } from '../../db/queries';
+import { BoardType, updateBoard } from '../../db/queries';
 
 type SudokuCell = {
   value: number | number[];
@@ -15,9 +15,11 @@ type SudokuCell = {
 };
 
 type SudokuContextType = {
+  startTime: number;
   boardDbId: number;
   currentCell: number;
   pencilMode: boolean;
+  level: string;
   handleErase: () => void;
   setCurrentCell: (currentCell: number) => void;
   setPencilMode: (pencilMode: boolean) => void;
@@ -32,7 +34,15 @@ const addOnceInArray = (arr: number[], digit: number) => {
   return arr.concat(digit).sort((a, b) => a - b);
 };
 
+const fromDbToContextType = (dbBoard: BoardType['board']) =>
+  dbBoard.map(c => ({ ...c, isEditable: c.isEditable === 1 }));
+
+const fromContextTypeToDb = (contextBoard: SudokuCell[]) =>
+  contextBoard.map(c => ({ ...c, isEditable: c.isEditable ? 1 : 0 }));
+
 const initialContext: SudokuContextType = {
+  level: '',
+  startTime: -1,
   boardDbId: -1,
   currentCell: -1,
   pencilMode: false,
@@ -56,10 +66,14 @@ export const SudokuContextProvider = ({
   const [pencilMode, setPencilMode] = useState(false);
   const [sudokuBoard, setSudokuBoard] = useState<SudokuCell[]>([]);
   const [boardDbId, setBoardDbId] = useState(-1);
+  const [startTime, setStartTime] = useState(-1);
+  const [level, setLevel] = useState('');
 
   const contextValue: SudokuContextType = useMemo(() => {
     return {
+      level,
       boardDbId,
+      startTime,
       currentCell,
       pencilMode,
       handleErase: () => {
@@ -69,11 +83,22 @@ export const SudokuContextProvider = ({
           return;
         }
         cell.value = -1;
-        setSudokuBoard([
+        const newSudokuBoard = [
           ...sudokuBoard.slice(0, index),
           cell,
           ...sudokuBoard.slice(index + 1),
-        ]);
+        ];
+        updateBoard(boardDbId, {
+          type: level,
+          board: fromContextTypeToDb(newSudokuBoard),
+        })
+          .then(() => {
+            setSudokuBoard(newSudokuBoard);
+          })
+          .catch(err => {
+            // TODO: show error to user
+            console.error(err);
+          });
       },
       setCurrentCell,
       setPencilMode,
@@ -93,23 +118,32 @@ export const SudokuContextProvider = ({
           cell.value = digit;
         }
 
-        setSudokuBoard([
+        const newSudokuBoard = [
           ...sudokuBoard.slice(0, index),
           cell,
           ...sudokuBoard.slice(index + 1),
-        ]);
+        ];
+
+        updateBoard(boardDbId, {
+          type: level,
+          board: fromContextTypeToDb(newSudokuBoard),
+        })
+          .then(() => {
+            setSudokuBoard(newSudokuBoard);
+          })
+          .catch(err => {
+            // TODO: show error to user
+            console.error(err);
+          });
       },
     };
-  }, [currentCell, pencilMode, sudokuBoard]);
+  }, [currentCell, pencilMode, sudokuBoard, boardDbId, startTime, level]);
 
   useEffect(() => {
     setBoardDbId(sudoku.id);
-    setSudokuBoard(
-      sudoku.board.map(v => ({
-        isEditable: v === undefined,
-        value: v,
-      })),
-    );
+    setStartTime(sudoku.time);
+    setLevel(sudoku.level);
+    setSudokuBoard(fromDbToContextType(sudoku.board));
   }, [sudoku]);
 
   return (

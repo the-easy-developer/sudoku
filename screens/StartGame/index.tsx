@@ -13,13 +13,17 @@ export const StartGame = () => {
   const [boards, setBoards] = useState<BoardType[]>([]);
 
   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
     // TODO: add loading state, handle catch scenario
-    openDB().then(() => {
-      queryBoards().then(boards => {
-        setBoards(boards);
+      openDB().then(() => {
+        queryBoards().then(boards => {
+          setBoards(boards);
+        });
       });
     });
-  }, []);
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.screen}>

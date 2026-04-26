@@ -28,7 +28,7 @@ export const Cell = ({
 
   const isActive = currentCell === index;
 
-  const { value } = sudokuBoard[index - 1] ?? {};
+  const { value, isEditable } = sudokuBoard[index - 1] ?? {};
 
   return (
     <Pressable onPress={() => setCurrentCell(index)}>
@@ -76,6 +76,7 @@ export const Cell = ({
               textAlign: 'center',
             },
             isActive && cellStyleSheet.active,
+            !isEditable && cellStyleSheet.notEditable,
           ]}
         >
           {dontDisplayEmpty(value)}
@@ -88,5 +89,8 @@ export const Cell = ({
 const cellStyleSheet = StyleSheet.create({
   active: {
     backgroundColor: '#0398fc',
+  },
+  notEditable: {
+    color: '#777',
   },
 });

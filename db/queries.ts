@@ -4,7 +4,7 @@ import { DataBoardType } from './data';
 export type BoardType = {
   id: number;
   level: string;
-  board: (number | number[])[];
+  board: DataBoardType['board'];
   time: number;
   isCompleted: boolean;
 };
@@ -32,6 +32,46 @@ export const queryBoards = () => {
             });
           }
           resolve(boards);
+        },
+        (tx, err) => {
+          reject(err);
+          return false;
+        },
+      );
+    });
+  });
+};
+
+export const updateTime = (boardId: number, time: number) => {
+  const db = getDB();
+  return new Promise<boolean>((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE ${table_name} SET time = ? WHERE id = ?`,
+        [time, boardId],
+        (tx, resultSet) => {
+          console.log('sqlite update time', tx, resultSet);
+          resolve(true);
+        },
+        (tx, err) => {
+          reject(err);
+          return false;
+        },
+      );
+    });
+  });
+};
+
+export const updateBoard = (boardId: number, board: DataBoardType) => {
+  const db = getDB();
+  return new Promise<boolean>((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE ${table_name} SET board = json(?) WHERE id = ?`,
+        [JSON.stringify(board), boardId],
+        (tx, resultSet) => {
+          console.log('sqlite update board', tx, resultSet);
+          resolve(true);
         },
         (tx, err) => {
           reject(err);

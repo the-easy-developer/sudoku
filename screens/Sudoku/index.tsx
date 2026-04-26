@@ -1,6 +1,5 @@
 import { RouteProp } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View } from 'react-native';
 
 import { Timer } from './Timer';
 import { Operations } from './Operations';

@@ -5,14 +5,16 @@
  * @format
  */
 
+import { useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Orientation from 'react-native-orientation-locker';
+import BootSplash from 'react-native-bootsplash';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { StartGame } from './screens/StartGame';
 import { Sudoku } from './screens/Sudoku';
-import { useEffect } from 'react';
-import Orientation from 'react-native-orientation-locker';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'StartGame',
@@ -39,6 +41,10 @@ function App() {
     return () => {
       Orientation.unlockAllOrientations();
     }
+  }, []);
+
+  useEffect(() => {
+    BootSplash.hide();
   }, []);
 
   return (

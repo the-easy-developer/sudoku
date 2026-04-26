@@ -17,7 +17,8 @@
     "react-native": "0.85.2",
     "react-native-orientation-locker": "^1.7.0",
     "react-native-safe-area-context": "^5.7.0",
-    "react-native-screens": "^4.24.0"
+    "react-native-screens": "^4.24.0",
+    "react-native-sqlite-2": "^3.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

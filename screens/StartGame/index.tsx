@@ -1,25 +1,45 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text, Button, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable, Text, useWindowDimensions } from 'react-native';
+
+import { openDB } from '../../db';
+import { useEffect, useState } from 'react';
+import { BoardType, queryBoards } from '../../db/queries';
+import { formatTime } from '../../utils';
 
 export const StartGame = () => {
+  // TODO: remove any
   const navigation = useNavigation<any>();
+
+  const [boards, setBoards] = useState<BoardType[]>([]);
+
+  useEffect(() => {
+    openDB().then(() => {
+      queryBoards().then(boards => {
+        setBoards(boards);
+      });
+    });
+  }, []);
 
   return (
     <View style={styles.screen}>
-      <Button
-        title="Go to Sudoku"
-        onPress={() =>
-          navigation.navigate('Sudoku', {
-            sudoku: [
-              7, -1, 9, -1, -1, -1, -1, 2, -1, 2, 8, -1, -1, -1, -1, -1, 9, -1,
-              1, -1, 5, 9, 2, 3, -1, -1, 7, -1, -1, 8, -1, 9, 6, 7, -1, 2, 9,
-              -1, 6, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, 4, 8, -1, -1, 3, -1,
-              9, -1, -1, -1, 2, -1, -1, -1, 8, -1, -1, 6, -1, -1, 5, 7, -1, -1,
-              -1, -1, 7, -1, -1, -1, -1, 4,
-            ].map(v => (v === -1 ? undefined : v)),
-          })
-        }
-      />
+      {boards.map(b => {
+        return (
+          <Pressable
+            key={b.id}
+            onPress={() => {
+              console.log(b);
+            }}
+            style={styles.button}
+          >
+            <Text style={{ textAlign: 'center', color: '#fff', fontSize: 25 }}>
+              {b.level}
+            </Text>
+            <Text style={{ textAlign: 'center', color: '#fff' }}>
+              {formatTime(b.time)}
+            </Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
 };
@@ -29,5 +49,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    gap: 10,
+  },
+  button: {
+    width: 200,
+    height: 80,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#0398fc',
+    gap: 7,
   },
 });

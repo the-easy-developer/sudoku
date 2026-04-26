@@ -83,7 +83,7 @@ export const SudokuContextProvider = ({
         if (pencilMode) {
           cell.value = Array.isArray(cell.value)
             ? addOnceInArray(cell.value, digit)
-            : [digit];
+            : addOnceInArray(cell.value ? [cell.value] : [], digit);
         } else {
           cell.value = digit;
         }

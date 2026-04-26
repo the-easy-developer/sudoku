@@ -36,7 +36,6 @@ export const Cell = ({
               ...cellStyle,
               height: cellSize,
               width: cellSize,
-              paddingTop: cellSize / 8,
             },
             isActive && cellStyleSheet.active,
             {
@@ -44,8 +43,7 @@ export const Cell = ({
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
-              // borderColor: '#f00',
-              // borderWidth: 1,
+              paddingLeft: cellSize / 8,
             },
           ]}
         >
@@ -53,11 +51,10 @@ export const Cell = ({
             <Text
               key={d}
               style={{
-                fontSize: cellSize / 5,
-                width: '30%',
+                fontSize: cellSize / 4,
+                width: '33%',
                 height: '33%',
                 opacity: value.includes(d) ? 1 : 0,
-                flex: 1,
               }}
             >
               {d}
